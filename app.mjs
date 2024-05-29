@@ -3,6 +3,7 @@ import logger from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRouter from "./routes/api/auth.mjs";
+import customersRouter from "./routes/api/customers.mjs";
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/user", authRouter);
-// app.use("/api/customers", customersRouter);
+app.use("/api/customers", customersRouter);
 // app.use("/api/orders", ordersRouter);
 // app.use("/api/products", productsRouter);
 // app.use("/api/suppliers", suppliersRouter);
