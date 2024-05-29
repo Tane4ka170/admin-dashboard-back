@@ -2,7 +2,7 @@ import express from "express";
 import logger from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
-import authRouter from "./routes/api/auth";
+import authRouter from "./routes/api/auth.mjs";
 
 dotenv.config();
 

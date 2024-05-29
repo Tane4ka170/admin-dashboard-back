@@ -1,7 +1,6 @@
-const { Schema, model } = require("mongoose");
-const Joi = require("joi");
-
-const { handleMongooseError } = require("../helpers");
+import { Schema, model } from "mongoose";
+import Joi from "joi";
+import handleMongooseError from "../helpers/handleMongooseError.mjs";
 
 const emailRegexp =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -71,4 +70,4 @@ const schemas = {
 
 const User = model("user", userSchema);
 
-module.exports = { User, schemas };
+export { User, schemas };

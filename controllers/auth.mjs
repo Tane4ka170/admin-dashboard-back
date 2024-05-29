@@ -1,10 +1,10 @@
 import { User } from "../models/user.mjs";
-import { HttpError } from "../helpers/HttpError.js";
-import { ctrlWrapper } from "../helpers/ctrlWrapper.mjs";
+import ctrlWrapper from "../helpers/ctrlWrapper.mjs";
 import { nanoid } from "nanoid";
 import jwt from "jsonwebtoken";
-import bcryptjs from "bcryptjs";
+import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import HttpError from "../helpers/HttpError.mjs";
 dotenv.config();
 
 const { SECRET_KEY } = process.env;
@@ -16,7 +16,7 @@ export const register = async (req, res) => {
     throw HttpError(409, "Email in use");
   }
 
-  const hashPassword = await bcryptjs.hash(password, 10);
+  const hashPassword = await bcrypt.hash(password, 10);
   const verificationToken = nanoid();
 
   const newUser = await User.create({
@@ -37,7 +37,7 @@ export const login = async (req, res) => {
     throw HttpError(401, "Email or password is wrong");
   }
 
-  const passwordCompare = await bcryptjs.compare(password, user.password);
+  const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare) {
     throw HttpError(401, "Email or password is wrong");
   }
