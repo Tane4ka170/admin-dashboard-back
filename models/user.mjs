@@ -3,46 +3,22 @@ import Joi from "joi";
 import handleMongooseError from "../helpers/handleMongooseError.mjs";
 
 const emailRegexp =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const userSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
     password: {
       type: String,
+      minLength: 7,
       required: [true, "Set password for user"],
-      minlength: 6,
     },
     email: {
       type: String,
       match: emailRegexp,
-      required: [true, "Email is required"],
       unique: true,
+      required: [true, "Email is required"],
     },
-    subscription: {
-      type: String,
-      enum: ["starter", "pro", "business"],
-      default: "starter",
-    },
-    token: {
-      type: String,
-      default: "",
-    },
-    avatarURL: {
-      type: String,
-      required: true,
-    },
-    isVerified: {
-      type: Boolean,
-      default: false,
-      required: true,
-    },
-    verificationToken: {
-      type: String,
-    },
+    token: String,
   },
   { versionKey: false, timestamps: true }
 );
@@ -50,24 +26,20 @@ const userSchema = new Schema(
 userSchema.post("save", handleMongooseError);
 
 const registerSchema = Joi.object({
-  name: Joi.string().required(),
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(6).required(),
-});
-const loginSchema = Joi.object({
-  email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().min(7).required(),
 });
 
 const emailSchema = Joi.object({
-  email: Joi.string().pattern(emailRegexp).required(),
+  email: Joi.string()
+    .pattern(emailRegexp)
+    .required()
+    .messages({ "any.required": "missing required field email" }),
 });
-const schemas = {
+
+export const schemas = {
   registerSchema,
-  loginSchema,
   emailSchema,
 };
 
-const User = model("user", userSchema);
-
-export { User, schemas };
+export const User = model("user", userSchema);
