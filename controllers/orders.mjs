@@ -1,5 +1,5 @@
 import ctrlWrapper from "../helpers/ctrlWrapper.mjs";
-import { Order } from "../models/order.js";
+import { Order } from "../models/order.mjs";
 
 export const listOrders = async (req, res) => {
   const { page = "1", limit = "5", name } = req.query;
