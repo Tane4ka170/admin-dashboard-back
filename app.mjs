@@ -8,6 +8,7 @@ import ordersRouter from "./routes/api/orders.mjs";
 import productsRouter from "./routes/api/products.mjs";
 import suppliersRouter from "./routes/api/suppliers.mjs";
 import incomesRouter from "./routes/api/incomes.mjs";
+import dashboardsRouter from "./routes/api/dashboards.mjs";
 
 dotenv.config();
 
@@ -24,7 +25,7 @@ app.use("/api/customers", customersRouter);
 app.use("/api/orders", ordersRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/suppliers", suppliersRouter);
-// app.use("/api/dashboard", dashboardsRouter);
+app.use("/api/dashboard", dashboardsRouter);
 app.use("/api/incomes", incomesRouter);
 
 app.use((req, res) => {
