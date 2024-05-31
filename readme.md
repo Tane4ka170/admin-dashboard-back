@@ -1,31 +1,85 @@
-## GoIT Node.js Course Template Homework
+# Admin Dashboard
 
-Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
-Форк створить репозиторій на вашому http://github.com
+A template for setting up a Node.js server with Express and MongoDB, featuring user authentication, customer management, order management, product management, supplier management, income tracking, and dashboard functionalities.
 
-Додайте ментора до колаборації
+## Getting Started
 
-Для кожної домашньої роботи створюйте свою гілку.
+### Prerequisites
 
-- hw02
-- hw03
-- hw04
-- hw05
-- hw06
+- Node.js (v14+)
+- npm (v6+)
+- MongoDB instance
 
-Кожна нова гілка для др повинна робитися з master
+### Installation
 
-Після того, як ви закінчили виконувати домашнє завдання у своїй гілці, необхідно зробити пулл-реквест (PR). Потім додати ментора для рев'ю коду. Тільки після того, як ментор заапрувить PR, ви можете виконати мердж гілки з домашнім завданням у майстер.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-repo/admin-dashboard.git
+   cd admin-dashboard
+   ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Set up environment variables:**
+   Create a .env file in the root of the project with the following content:
+   ```plaintext
+   DB_HOST=your_mongodb_connection_string
+   ```
 
-Уважно читайте коментарі ментора. Виправте зауваження та зробіть коміт у гілці з домашнім завданням. Зміни підтягнуться у PR автоматично після того, як ви відправите коміт з виправленнями на github
-Після виправлення знову додайте ментора на рев'ю коду.
+### Running the Server
+◻︎ Development:
 
-- При здачі домашньої роботи є посилання на PR
-- JS-код чистий та зрозумілий, для форматування використовується Prettier
+```bash
+npm run start:dev
+   ```
+◻︎ Production:
 
-### Команди:
+```bash
+npm run start
+   ```
+The server listens on port 7284.
 
-- `npm start` &mdash; старт сервера в режимі production
-- `npm run start:dev` &mdash; старт сервера в режимі розробки (development)
-- `npm run lint` &mdash; запустити виконання перевірки коду з eslint, необхідно виконувати перед кожним PR та виправляти всі помилки лінтера
-- `npm lint:fix` &mdash; та ж перевірка лінтера, але з автоматичними виправленнями простих помилок
+### API Endpoints
+◻︎ Auth: POST /api/user/register, POST /api/user/login, POST /api/user/logout
+
+◻︎ Customers: CRUD operations at /api/customers
+
+◻︎ Orders: CRUD operations at /api/orders
+
+◻︎ Products: CRUD operations at /api/products
+
+◻︎ Suppliers: CRUD operations at /api/suppliers
+
+◻︎ Incomes: CRUD operations at /api/incomes
+
+◻︎ Dashboard: GET /api/dashboard
+
+### Error Handling
+◻︎ 404 Not Found: Returns {"message": "Not found"}
+
+◻︎ Server Errors: Returns {"message": "Server error"}
+
+### Linting
+◻︎ Check for linting errors:
+
+```bash
+npm run lint
+   ```
+
+◻︎ Auto-fix linting errors:
+
+```bash
+npm run lint:fix
+   ```
+
+### Project Structure
+◻︎ server.mjs: Main server entry point
+
+◻︎ app.mjs: Express app setup
+
+◻︎ routes/api: Route handlers
+
+◻︎ controllers: Business logic
+
+◻︎ models: Mongoose models
