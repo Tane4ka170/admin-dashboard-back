@@ -4,12 +4,12 @@ import handleMongooseError from "../helpers/handleMongooseError.mjs";
 
 const supplierSchema = new Schema(
   {
-    name: { type: String },
-    address: { type: String },
-    suppliers: { type: String },
-    date: { type: Date },
-    amount: { type: String },
-    status: { type: String, enum: ["Active", "Deactive"] },
+    name: { type: String, required: true },
+    address: { type: String, required: true },
+    suppliers: { type: String, required: true },
+    date: { type: Date, required: true },
+    amount: { type: Number, required: true },
+    status: { type: String, enum: ["Active", "Deactive"], required: true },
   },
   { versionKey: false, timestamps: true }
 );
@@ -29,7 +29,7 @@ const addSchema = Joi.object({
   date: Joi.date()
     .required()
     .messages({ "any.required": "missing required date field" }),
-  amount: Joi.string()
+  amount: Joi.number()
     .required()
     .messages({ "any.required": "missing required amount field" }),
   status: Joi.string()
@@ -43,7 +43,7 @@ const updateSchema = Joi.object({
   address: Joi.string(),
   suppliers: Joi.string(),
   date: Joi.date(),
-  amount: Joi.string(),
+  amount: Joi.number(),
   status: Joi.string(),
 });
 
