@@ -4,7 +4,7 @@ import handleMongooseError from "../helpers/handleMongooseError.mjs";
 const incomeSchema = new Schema(
   {
     name: { type: String },
-    amount: { type: String },
+    amount: { type: Number },
     type: { type: String },
   },
   { versionKey: false, timestamps: true }

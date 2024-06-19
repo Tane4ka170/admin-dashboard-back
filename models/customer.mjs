@@ -6,7 +6,7 @@ const customerSchema = new Schema(
     image: { type: String },
     name: { type: String },
     email: { type: String },
-    spent: { type: String },
+    spent: { type: Number },
     phone: { type: String },
     address: { type: String },
     register_date: { type: Date },
